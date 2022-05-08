@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "products"></div>
+</body>
+</html>
+<script>
+    var cartLS = JSON.parse(localStorage.getItem("cartt"))||[]
+    display(cartLS)
+ function display(data){
+      product.innerHTML = null;
+     data.forEach(function(elem){
+         var card = document.createElement("div")
+         var img = document.createElement("img")
+         img.src = elem.img
+         var title = document.createElement("h2")
+         title.innerText = elem.brand
+         var desc = document.createElement("p")
+         desc.innerText = elem.name
+         var categ = document.createElement("h3")
+         categ.innerText = elem.catagory
+         var price = document.createElement("p")
+         price.innerText = elem.price
+         var btn = document.createElement("button")
+         btn.innerText = "Delete"
+         btn.addEventListener("click",function(){
+             Delete(elem.productID);
+         })
+         card.append(img,title,desc,categ,price,btn)
+         product.append(card)
+     })
+ }
+ function Delete(id)
+ {
+    cartLS = cartLS.filter(function(elem){
+             return elem.productID != id;
+         })
+         display(cartLS);
+         localStorage.setItem("carttt",JSON.stringify(cartLS))
+ }
+</script>
